@@ -1,13 +1,13 @@
-import './App.css'
-import Navbar from './components/Navbar'
+import './index.css'
+import Navbar from '../../components/Navbar'
 import { useState, useEffect } from 'react'
 import {
   saveCartToIndexedDB,
   getCartFromIndexedDB,
-} from './utilities/indexedDb'
-import { data } from './data/etalase'
+} from '../../utilities/indexedDb'
+import { data } from '../../data/etalase'
 
-function App() {
+function Products() {
   interface CartItem {
     id: string
     brand: string
@@ -142,4 +142,4 @@ function App() {
   )
 }
 
-export default App
+export default Products

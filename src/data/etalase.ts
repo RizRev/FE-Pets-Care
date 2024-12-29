@@ -1,0 +1,32 @@
+export const data = [
+    {
+      id: '1',
+      brand: 'Royal Canin',
+      name: 'Mother & Baby Cat',
+      description: 'Makanan kucing untuk umur dibawah 10 bulan',
+      price: 100000,
+      quantity: 400,
+      unit: 'gram',
+      img: 'https://cdn.pixabay.com/photo/2016/03/31/20/55/canines-1295175_1280.jpg',
+    },
+    {
+      id: '2',
+      brand: 'Whiskas',
+      name: 'Kitten Food',
+      description: 'Makanan kucing untuk anak kucing',
+      price: 80000,
+      quantity: 300,
+      unit: 'gram',
+      img: 'https://cdn.pixabay.com/photo/2017/06/20/18/40/cat-2422017_1280.jpg',
+    },
+    {
+      id: '3',
+      brand: 'Me-O',
+      name: 'Adult Cat Food',
+      description: 'Makanan kucing dewasa',
+      price: 70000,
+      quantity: 500,
+      unit: 'gram',
+      img: 'https://cdn.pixabay.com/photo/2017/06/20/18/40/cat-2422017_1280.jpg',
+    },
+  ]
