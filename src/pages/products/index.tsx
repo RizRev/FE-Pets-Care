@@ -1,5 +1,4 @@
-import './index.css'
-import Navbar from '../../components/Navbar'
+import './style.css'
 import { useState, useEffect } from 'react'
 import {
   saveCartToIndexedDB,
@@ -7,7 +6,11 @@ import {
 } from '../../utilities/indexedDb'
 import { data } from '../../data/etalase'
 
-function Products() {
+interface ProductsPageProps {
+  setCartLength: React.Dispatch<React.SetStateAction<number>>
+}
+
+function Products({ setCartLength }: ProductsPageProps) {
   interface CartItem {
     id: string
     brand: string
@@ -41,6 +44,8 @@ function Products() {
         return updatedCart
       } else {
         const updatedCart = [...prevCart, { ...item, number: 1 }]
+        const cartLength = updatedCart.length
+        setCartLength(cartLength)
         saveCartToIndexedDB(updatedCart)
         return updatedCart
       }
@@ -64,6 +69,8 @@ function Products() {
         } else {
           updatedCart = prevCart.filter((cartItem) => cartItem.id !== itemId)
         }
+        const cartLength = updatedCart.length
+        setCartLength(cartLength)
         saveCartToIndexedDB(updatedCart)
         return updatedCart
       } else {
@@ -79,7 +86,6 @@ function Products() {
 
   return (
     <>
-      <Navbar />
       <div className="p-20">
         <div className="flex flex-col ">
           <p

@@ -18,6 +18,12 @@ export const getCartFromIndexedDB = async () => {
   return cart || [];
 };
 
+export const getCartLengthFromIndexedDB = async () => {
+  const db = await dbPromise;
+  const cart = await db.get('cart', 'cart');
+  return cart ? cart.length : 0;
+}
+
 export const removeItemFromCartInIndexedDB = async (itemId: string) => {
     const db = await dbPromise;
     const cart = await db.get('cart', 'cart');
