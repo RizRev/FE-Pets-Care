@@ -142,7 +142,7 @@ export const Cart = ({ setCartLength }: ProductsPageProps) => {
                             </button>
                           </IconContext.Provider>
                         </div>
-                      ) : c v(
+                      ) : (
                         <button
                           className="font-poppins"
                           style={{
