@@ -5,6 +5,12 @@ import {
   getCartFromIndexedDB,
 } from '../../utilities/indexedDb'
 import { data } from '../../data/etalase'
+import { formatCurrency } from '../../helper/currency.ts'
+import {
+  FaRegSquareMinus,
+  FaRegSquarePlus,
+} from 'react-icons/fa6'
+import { IconContext } from 'react-icons'
 
 interface ProductsPageProps {
   setCartLength: React.Dispatch<React.SetStateAction<number>>
@@ -101,7 +107,7 @@ function Products({ setCartLength }: ProductsPageProps) {
             Product Overview
           </p>
         </div>
-        <div>
+        {/* <div>
           {cart.map((item) => (
             <div key={item.id}>
               {item.name}
@@ -111,33 +117,84 @@ function Products({ setCartLength }: ProductsPageProps) {
               </button>
             </div>
           ))}
-        </div>
+        </div> */}
         <div className="flex flex-wrap gap-10">
           {data.map((item) => (
             <div className="card bg-base-100 w-[298px] shadow-xl" key={item.id}>
               <figure>
                 <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                  src={item.img}
                   alt="Shoes"
+                  style={{ maxHeight: '160px', maxWidth: '300px', objectFit: 'contain' }}
                 />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">
-                  {item.brand} {item.name}
-                </h2>
-                <p>{item.description}</p>
+                <div style={{ height: '60px' }}>
+                  <h2 className="card-title">
+                    {`${item.brand} ${item.name}`.length > 35
+                      ? `${item.brand} ${item.name}`.substring(0, 35) + '...'
+                      : `${item.brand} ${item.name}`}
+                  </h2>
+                </div>
+                <div>
+                  <p style={{ height: '60px' }}>
+                    {item.description.length > 50
+                      ? `${item.description.substring(0, 50)}...`
+                      : item.description}
+                  </p>
+                </div>
+                <p
+                  className="font-roboto"
+                  style={{
+                    color: '#E36255',
+                    fontWeight: 'bold',
+                    fontSize: '20px',
+                  }}
+                >
+                  {formatCurrency(item.price)}
+                </p>
                 <div className="card-actions justify-end">
-                  {getCartQuantity(item.id) > 0 ? (
-                    <div>
-                      <button onClick={() => removeItemFromCart(item.id)}>
-                        -
+                  <p
+                    style={{ color: '#F3C262' }}
+                    className="font-roboto font-semibold"
+                  >{`${item.quantity} ${item.unit}`}</p>
+                  <div style={{ height: '25px' }} className="flex align-center" id='cart'>
+                    {getCartQuantity(item.id) > 0 ? (
+                      <div
+                        className="flex justify-between"
+                        style={{ width: '80px' }}
+                      >
+                        <IconContext.Provider
+                          value={{ color: '#A2C5C9', size: '1.5em' }}
+                        >
+                          <button onClick={() => removeItemFromCart(item.id)}>
+                            <FaRegSquareMinus />
+                          </button>
+                          {getCartQuantity(item.id)}
+                          <button onClick={() => addToCart(item)}>
+                            <FaRegSquarePlus />
+                          </button>
+                        </IconContext.Provider>
+                      </div>
+                    ) : (
+                      <button
+                        className="font-poppins"
+                        style={{
+                          fontSize: '14px',
+                          borderRadius: '12px',
+                          // paddingBottom: '6px',
+                          // paddingTop: '6px',
+                          paddingInline: '16px',
+                          backgroundColor: '#A2C5C9',
+                          color: '#FFFFFF',
+                          fontWeight: 'medium',
+                        }}
+                        onClick={() => addToCart(item)}
+                      >
+                        Buy Now
                       </button>
-                      {getCartQuantity(item.id)}
-                      <button onClick={() => addToCart(item)}>+</button>
-                    </div>
-                  ) : (
-                    <button onClick={() => addToCart(item)}>Buy Now</button>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

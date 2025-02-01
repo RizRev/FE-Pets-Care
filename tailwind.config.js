@@ -10,6 +10,7 @@ export default {
     fontFamily: {
       'poppins': ['Poppins', 'sans-serif'],
       'roboto': ['Roboto', 'sans-serif'],
+      'roboto-slab': ['Roboto Slab', 'serif'],
       'times-new-roman': ['Times New Roman', 'serif'],
     },
     extend: {},
